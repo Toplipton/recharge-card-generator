@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Recharge Card Generator</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Recharge Card Generator</h2>
+      <label for="network">Select Network:</label>
+      <select id="network">
+        <option value=""></option>
+        <option value="MTN">MTN</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Glo">Glo</option>
+        <option value="Etisalat">Etisalat</option>
+        <option value="Smile">Smile</option>
+      </select>
+
+      <label for="amount">Select Amount:</label>
+      <select id="amount">
+        <option value="100">₦100</option>
+        <option value="200">₦200</option>
+        <option value="500">₦500</option>
+        <option value="1000">₦1000</option>
+      </select>
+
+      <label>Generated Code:</label>
+      <input type="text" id="generatedPin" />
+      <button onclick="generatePin()">Generate</button>
+      <button onclick="savePin()">Save PIN</button>
+
+      <label>Enter PIN:</label>
+      <input type="text" id="enteredPin" />
+      <button onclick="recharge()">Recharge</button>
+    </div>
+
+    <table class="table-wrapper">
+      <thead>
+        <tr>
+          <th>S/N</th>
+          <th>Network</th>
+          <th>Amount</th>
+          <th>PIN</th>
+          <th>Status</th>
+          <th>Date Created</th>
+          <th>Date Used</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="pinTable"></tbody>
+    </table>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

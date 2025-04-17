@@ -1,0 +1,100 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+label,
+select,
+input,
+button {
+  margin: 10px 0;
+  display: block;
+  width: 100%;
+  padding: 8px;
+}
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #2d8821;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+th {
+  background-color: #007bff;
+  color: white;
+}
+.status-used {
+  color: red;
+}
+
+@media (max-width: 600px) {
+  /* Make form section more spacious */
+  .container {
+    width: 95%;
+    padding: 20px 10px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* Table section styling */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+
+  .table-wrapper table {
+    min-width: 700px;
+  }
+
+  th,
+  td {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
