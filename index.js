@@ -67,20 +67,25 @@ function del(index) {
 }
 
 function recharge() {
-  let index = pinDatabase.findIndex(
-    (check) => check.pin === enteredPin.value.trim()
-  );
+
+  let index = pinDatabase.findIndex((check) => check.pin === enterPin.value.trim());
+
   if (index !== -1) {
+    if (pinDatabase[index].status === "used") {
+      alert("This recharge pin has already been used!");
+      return;
+    }
+
     let today = new Date().toLocaleDateString();
     pinDatabase[index].status = "used";
     pinDatabase[index].dateUsed = today;
+
     alert(
-      `Your ${pinDatabase[index].network} Recharge of #${pinDatabase[index].amount} airtime is Successful!`
+      `Your ${pinDatabase[index].network} recharge of #${pinDatabase[index].amount} airtime is successful!`
     );
+
     updateUI();
   } else {
-    alert("pin not found");
+    alert("Pin not found!");
   }
-
-  updateUI();
 }
