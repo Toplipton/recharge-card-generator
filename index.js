@@ -1,49 +1,67 @@
 let pinDatabase = [];
 
-let newPinData;
+let newPinData, randomNumbers, inputePin;
 
-let randomNumbers;
-
-let inputePin;
-
-function generatePin() {
+document.getElementById("generate").addEventListener("click", () => {
   randomNumbers = Math.floor(
     100000000000 + Math.random() * 900000000000
   ).toString();
   inputePin = document.getElementById("generatedPin");
   inputePin.value = randomNumbers;
+});
+
+function getUssdCode(network, pin) {
+  const ussdMap = {
+    MTN: `*904*${pin}#`,
+    Airtel: `*444*${pin}#`,
+    Glo: `*123*${pin}#`,
+    Etisalat: `*311*${pin}#`,
+    Smile: `*450*${pin}#`,
+  };
+
+  // Return the USSD code corresponding to the selected network
+  return ussdMap[network];
 }
 
 function savePin() {
+  // Retrieve the selected network and amount from the input fields
+  const selectedNetwork = network.value;
+  const selectedAmount = amount.value;
+
+  //validate that a network or an amount is selected by the user
+  if (!selectedNetwork || !selectedAmount) {
+    alert("Please select a network and/or an amount first.");
+    return;
+  }
+
   inputePin.value = "";
-  newPinData = {
-    network: network.value,
-    amount: amount.value,
-    pin: "",
-    status: "Unused",
+
+  const ussdCode = getUssdCode(selectedNetwork, randomNumbers);
+
+  // Validate that a valid USSD code was generated
+  if (!ussdCode) {
+    alert("Invalid network selected.");
+    return;
+  }
+
+  // Create a new object to store the PIN data
+  const newPinData = {
+    network: selectedNetwork,
+    amount: selectedAmount,
+    pin: ussdCode,
+    status: "unused",
     dateCreated: new Date().toLocaleString(),
     dateUsed: "Not used",
   };
-  if (network.value === "MTN") {
-    newPinData.pin = `*904*${randomNumbers}#`;
-  } else if (network.value === "Airtel") {
-    newPinData.pin = `*444* ${randomNumbers}#`;
-  } else if (network.value === "Glo") {
-    newPinData.pin = `*123* ${randomNumbers}#`;
-  } else if (network.value === "Etisalat") {
-    newPinData.pin = `*311*${randomNumbers}#`;
-  } else if (network.value === "Smile") {
-    newPinData.pin = `*450* ${randomNumbers}#`;
-  } else {
-    alert("Network is not selected");
-  }
+
+  // Add the new PIN data to the database array
   pinDatabase.push(newPinData);
 
+  // Update the user interface to show the new data
   updateUI();
 }
-function updateUI() {
-  pinTable.innerHTML = "";
 
+function updateUI() {
   pinTable.innerHTML = pinDatabase
     .map(
       (pin, i) => `
@@ -61,14 +79,20 @@ function updateUI() {
     )
     .join("");
 }
+//Delete functioin and Confirmation of delete first
 function del(index) {
-  pinDatabase.splice(index, 1);
-  updateUI();
+  const userConfirmed = confirm("Are you sure you want to delete?");
+
+  if (userConfirmed) {
+    pinDatabase.splice(index, 1);
+    updateUI();
+  }
 }
 
 function recharge() {
-
-  let index = pinDatabase.findIndex((check) => check.pin === enterPin.value.trim());
+  let index = pinDatabase.findIndex(
+    (check) => check.pin === enterPin.value.trim()
+  );
 
   if (index !== -1) {
     if (pinDatabase[index].status === "used") {
@@ -89,3 +113,4 @@ function recharge() {
     alert("Pin not found!");
   }
 }
+

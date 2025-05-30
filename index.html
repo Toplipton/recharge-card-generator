@@ -9,7 +9,7 @@
       <h2>Recharge Card Generator</h2>
       <label for="network">Select Network:</label>
       <select id="network">
-        <option value=""></option>
+        <option value="">Select a network</option>
         <option value="MTN">MTN</option>
         <option value="Airtel">Airtel</option>
         <option value="Glo">Glo</option>
@@ -19,15 +19,16 @@
 
       <label for="amount">Select Amount:</label>
       <select id="amount">
+        <option value="">Select an amount</option>
         <option value="100">₦100</option>
         <option value="200">₦200</option>
         <option value="500">₦500</option>
         <option value="1000">₦1000</option>
-      </select>
+      </select> 
 
       <label>Generated Code:</label>
       <input type="text" id="generatedPin" />
-      <button onclick="generatePin()">Generate</button>
+      <button  id="generate">Generate</button>
       <button onclick="savePin()">Save PIN</button>
 
       <label>Enter PIN:</label>
